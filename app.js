@@ -1,15 +1,12 @@
 console.log("Hi there");
 let pausePlease = false;
 //need gobal vriable for cookie count
-let cookieCount = 9;
+let cookieCount = 0;
 let cookiesPerSecond = 0;
 let gameStarted = JSON.parse(localStorage.getItem("running"));
 let gameInterval;
 let itemsOwnedInterval;
-let shopItems; //check to see if shop info is in API or local storage
-// const sectionTop = document.querySelector("section");
-// sectionTop.style.display = "flex";
-// sectionTop.style.flexBasis = "column";
+let shopItems;
 const mainCookie = document.querySelector(".main-cookie");
 mainCookie.style.display = "none"; // this is hidden until initial api load, because on the very small chance it's listener is triggered before then it will break the data retrieval system. reinstated end of storebuild()
 
@@ -286,7 +283,7 @@ if (gameStarted === true) {
 function resetGame() {
   // pausePlease = true; //bebugging tool
 
-  cookieCount = 9999999999;
+  cookieCount = 0;
   cookieCountDisplay.textContent = `${cookieCount}`;
   cookiesPerSecond = 0;
   cookiesPerSecondDisplay.textContent = `CPS:${cookiesPerSecond}`;
