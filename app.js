@@ -23,7 +23,6 @@ mainCookie.addEventListener("click", () => {
       cookieCount = cookieCount + cookiesPerSecond;
       cookieCountDisplay.textContent = `${cookieCount}`;
       dataUpdate();
-      console.log("tick");
     }, 1000);
     dataUpdate();
   }
@@ -53,16 +52,8 @@ function buildDisplay() {
   cookiesPerSecondDisplay.style.height = "46px"; //this fixes display size when changing content font size, looks okay on different screen sizes but possibly another way to make sure this happens in a dynamic way
   collectionData.appendChild(cookiesPerSecondDisplay);
 }
-// collectionData.appendChild(y);
-// use some DOM to display //
-//cookie count,
-//cookies per second
-// cookie (img) to click
-// select or create elemnts with JS
 
-//a way to store shop items from api
-
-let fetchedItems; //local orapi data goes here
+let fetchedItems; //local or fetched API data goes here
 
 async function restockShopItems() {
   let localCheck = localStorage.getItem("count");
@@ -71,10 +62,7 @@ async function restockShopItems() {
     cookieCount = JSON.parse(localStorage.getItem("count"));
     cookiesPerSecond = JSON.parse(localStorage.getItem("CPS"));
     fetchedItems = JSON.parse(localStorage.getItem("shop"));
-
-    console.log(fetchedItems, cookieCount, cookiesPerSecond);
   } else {
-    console.log("hey ho");
     //get api, display in store
     //fetch api (this arrives in the form of an array of objects) REMEMBER TO ASYNC AND AWAIT
     const response = await fetch(
@@ -185,7 +173,7 @@ function buildStore(itemCrate) {
     itemsOwnedInterval = setInterval(function () {
       numberOwnedDisplay.textContent = `${item.owned}/10 owned`; // this updates ownership no# on page
     }, 1); // trying to implemented either here by initialising button and event listener or in  createbutton function would not work, maybe due to variable scope, maybe not
-    //or as part of event listener
+
     itemDisplayContainer.appendChild(numberOwnedDisplay);
     let expectedIncrease = document.createElement("h3");
     expectedIncrease.textContent = `+${item.increase} per second`;
@@ -220,7 +208,6 @@ function buildStore(itemCrate) {
       "Select if you're certain you wish to reset all progress, including upgrades and cookies collected";
     resetYesButton.addEventListener("click", () => {
       resetButtonContainer.ariaLabel = "";
-      // resetButton.ariaLabel = "Use this to reset Progress";
       resetGame();
     });
     const resetNoButton = document.createElement("button");
@@ -237,7 +224,6 @@ function buildStore(itemCrate) {
       resetYesButton.remove();
       resetNoButton.remove();
       resetButtonContainer.ariaLabel = "";
-      // resetButton.ariaLabel = "Use this to reset Progress";
       resetButtonContainer.appendChild(resetButton);
     });
 
@@ -269,7 +255,6 @@ buildStore(shopItems);
 if (gameStarted === true) {
   /// this logic makes the game continue running after refresh without clicking first cookie
 
-  console.log("tock");
   cookieCountDisplay.textContent = `${cookieCount}`;
   gameInterval = setInterval(() => {
     cookieCount = cookieCount + cookiesPerSecond;
@@ -296,11 +281,6 @@ function resetGame() {
   clearInterval(gameInterval);
   clearInterval(itemsOwnedInterval);
   storeDisplay.innerHTML = null;
-  // const storeDisplay = createElement("section");
-  // storeDisplay.className = "shop";
-  // document.body.appendChild(storeDisplay);
-  // shopItems = await restockShopItems();   // this wouldn't run properly due to a sync issue, but can't instruct to await here
 
   buildStore(shopItems);
-} //possibly redundant given how logic works // possibly a codebreaker
-// });
+}
