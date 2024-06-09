@@ -121,7 +121,7 @@ section {
     font-size: 15px;
   }
 }
-/* flips display to bring cookie to bottom if on mobile */
+/*  flips display to bring cookie to bottom if on mobile */
 @media (max-width: 450px) {
   .main-game-body {
     flex-direction: column-reverse;
